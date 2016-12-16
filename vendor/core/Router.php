@@ -1,6 +1,7 @@
 <?php
 
 namespace vendor\core;
+use app\controllers\ErrorController;
 
 /**
  * Класс Router для работы с маршрутами
@@ -105,7 +106,8 @@ class Router
                 }
             }
         } catch (\Exception $e) {
-            http_response_code(404);
+            $controller = new ErrorController(['controller' =>'Error', 'action' =>'index']);
+            $action = $controller->indexAction();
         }
 
     }
