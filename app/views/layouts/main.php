@@ -96,11 +96,11 @@
                                 </a>
                             </li>
 
-                                <li><a href="/user/login/"><i class="fa fa-lock"></i> Вход</a></li>
+                            <li><a href="/user/login/"><i class="fa fa-lock"></i> Вход</a></li>
 
-                                <li><a href="/cabinet/"><i class="fa fa-user"></i> Аккаунт</a></li>
-                                <li><a href="/user/logout/"><i class="fa fa-unlock"></i> Выход
-                                    </a></li>
+                            <li><a href="/cabinet/"><i class="fa fa-user"></i> Аккаунт</a></li>
+                            <li><a href="/user/logout/"><i class="fa fa-unlock"></i> Выход
+                                </a></li>
 
                         </ul>
                     </div>
@@ -146,7 +146,7 @@
                     <div class="search_box pull-right">
                         <form method="post" action="#">
 
-                            <input id= "search" type="submit" value=" ">
+                            <input id="search" type="submit" value=" ">
                             <input type="text" placeholder="Search" name="q">
                         </form>
                     </div>
@@ -177,7 +177,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="/../public/images/home/iframe1.png" alt="" />
+                                    <img src="/../public/images/home/iframe1.png" alt=""/>
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -192,7 +192,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="/../public/images/home/iframe2.png" alt="" />
+                                    <img src="/../public/images/home/iframe2.png" alt=""/>
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -207,7 +207,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="/../public/images/home/iframe3.png" alt="" />
+                                    <img src="/../public/images/home/iframe3.png" alt=""/>
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -222,7 +222,7 @@
                         <div class="video-gallery text-center">
                             <a href="#">
                                 <div class="iframe-img">
-                                    <img src="/../public/images/home/iframe4.png" alt="" />
+                                    <img src="/../public/images/home/iframe4.png" alt=""/>
                                 </div>
                                 <div class="overlay-icon">
                                     <i class="fa fa-play-circle-o"></i>
@@ -235,7 +235,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="address">
-                        <img src="/../public/images/home/map.png" alt="" />
+                        <img src="/../public/images/home/map.png" alt=""/>
                         <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
                     </div>
                 </div>
@@ -244,12 +244,12 @@
     </div>
 
 
-
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
                 <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-                <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+                <p class="pull-right">Designed by <span><a target="_blank"
+                                                           href="http://www.themeum.com">Themeum</a></span></p>
             </div>
         </div>
     </div>
@@ -269,7 +269,7 @@
             });
             return false;
         });
-        function showCount(data){
+        function showCount(data) {
             $("#cart-count").html(data);
         }
 
