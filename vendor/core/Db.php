@@ -66,6 +66,13 @@ class Db
         return $stmt->fetchAll(\PDO::FETCH_CLASS,static::class);
     }
 
+    /**
+     * @param string $sql текущий sql-запрос
+     * @param $key string ключ массива с данными
+     * @param array $params параметры запроса
+     * @return array массив с данными
+     */
+
     public function queryEach($sql,$key,$params = [])
     {
         $stmt = $this->pdo->prepare($sql);
@@ -77,6 +84,12 @@ class Db
         return $arr_cat;
 
     }
+
+    /**
+     * @param string $sql текущий sql-запрос
+     * @param array $params параметры запроса
+     * @return integer количество товаров
+     */
 
     public function queryCount($sql,$params = [])
     {
