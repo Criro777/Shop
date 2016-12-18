@@ -66,7 +66,7 @@ class Db
         return $stmt->fetchAll(\PDO::FETCH_CLASS,static::class);
     }
 
-    public function queryEach($sql,$key, $params = [])
+    public function queryEach($sql,$key,$params = [])
     {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
@@ -75,6 +75,15 @@ class Db
             $arr_cat[$row[$key]] = $row;
         }
         return $arr_cat;
+
+    }
+
+    public function queryCount($sql,$params = [])
+    {
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+            $row = $stmt->fetch();
+        return $row['count'];
 
     }
 
