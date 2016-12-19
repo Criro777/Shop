@@ -3,32 +3,34 @@
 namespace app\models;
 
 use vendor\core\base\Model;
+use vendor\core\Db;
 
 /**
  * Класс Product - модель для работы с товарами
  */
 class Product extends Model
 {
-    const SHOW_BY_DEFAULT = 6;
+    const SHOW_BY_DEFAULT = 3;
     const TABLE = 'product';
 
-    public static function getProductsListByCategory($categoryId = false, $page = 1)
+    public static function getProductsInCategory($categoryId = false, $page = 1)
     {
         if ($categoryId) {
 
             $offset = ($page - 1) * self::SHOW_BY_DEFAULT;
-            $db = Db::getConnection();
-            $products = array();
-            $result = $db->query("SELECT * FROM product "
-                . "WHERE status = '1' AND category_id = '$categoryId' "
+            $db = Db::instance();
+            $products = [];
+            $sql = "SELECT * FROM product "
+                . "WHERE category_id = '$categoryId' "
                 . "ORDER BY id ASC "
                 . "LIMIT " . self::SHOW_BY_DEFAULT
-                . ' OFFSET ' . $offset);
-            $result->setFetchMode(\PDO::FETCH_CLASS, Product::class);
+                . ' OFFSET ' . $offset;
+            $result = $db->query($sql);
+            //if(!$result){
+                //throw new \Exception();
+            //}
 
-            while ($row = $result->fetch()) {
-                yield $row;
-            }
+            return $result;
         }
     }
 
@@ -46,13 +48,13 @@ class Product extends Model
 
     }
 
-    public static function getTotalProductsInCategory($categoryId)
+    public static function getCountProductsInCategory($categoryId)
     {
-        $db = Db::getConnection();
-        $result = $db->query('SELECT COUNT(id) AS count FROM product WHERE status = "1" AND category_id = "' . $categoryId . '"');
-        $result->setFetchMode(PDO::FETCH_ASSOC);
-        $row = $result->fetch();
-        return $row['count'];
+        $db = Db::instance();
+        $sql = 'SELECT COUNT(id) AS count FROM product WHERE category_id = "' . $categoryId . '"';
+        $result = $db->queryCount($sql);
+
+        return $result;
     }
 
     /**
