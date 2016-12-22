@@ -11,7 +11,6 @@
     <link href="/../public/css/animate.css" rel="stylesheet">
     <link href="/../public/css/main.css" rel="stylesheet">
     <link href="/../public/css/responsive.css" rel="stylesheet">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <!--[if lt IE 9]>
     <script src="/public/js/html5shiv.js"></script>
     <script src="/public/js/respond.min.js"></script>
@@ -92,6 +91,7 @@
                         <ul class="nav navbar-nav">
                             <li><a href="/cart">
                                     <i class="fa fa-shopping-cart"></i> Корзина
+                                    <span id="cart-count"><?php echo \app\models\Cart::countItems(); ?></span>
 
                                 </a>
                             </li>
@@ -140,7 +140,7 @@
                                     <li><a href="blog-single.html">Blog Single</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/contacts/">Contact</a></li>
+                            <li><a href="/site/contact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -258,39 +258,8 @@
 
 </footer><!--/Footer-->
 
-
-<script>
-    $(document).ready(function () {
-        $(".add-to-cart").click(function () {
-            var params = {
-                quantity: $("#quantity").val(),
-            }
-            var id = $(this).attr("id");
-            $.post("/cart/addAjax/" + id, params, function (data) {
-                showCount(data);
-            });
-            return false;
-        });
-        function showCount(data) {
-            $("#cart-count").html(data);
-        }
-
-
-        $("#clear-all").click(function () {
-            $.post("/cart/clear", {}, function (data) {
-                $("#cart_section").html(data);
-            });
-        });
-
-        $(".delete-item").click(function () {
-            var id = $(this).attr("id");
-            $.post("/cart/delete/" + id, {}, function (data) {
-                $("#cart_section").html(data);
-            });
-        });
-    });
-</script>
 <script src="/../public/js/jquery.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&;sensor=false"></script>
 <script src="/../public/js/bootstrap.min.js"></script>
 <script src="/../public/js/jquery.accordion.js"></script>
 <script src="/../public/js/jquery.cookie.js"></script>
@@ -300,5 +269,6 @@
 <script src="/../public/js/price-range.js"></script>
 <script src="/../public/js/jquery.prettyPhoto.js"></script>
 <script src="/../public/js/main.js"></script>
+
 </body>
 </html>
