@@ -50,7 +50,7 @@ class CartController extends AppController
         $productsInCart = Cart::getProductsInCart();
         if ($productsInCart) {
             $productsIds = array_keys($productsInCart);
-            $products = Product::getProductsByIds($productsIds);
+            $products = Product::getItemsInList('id',$productsIds);
             $totalPrice = Cart::getTotalPrice($products);
         }
         $this->render('index', [
@@ -128,7 +128,7 @@ class CartController extends AppController
                 // В корзине есть товары? - Да
                 // Итоги: общая стоимость, количество товаров
                 $productsIds = array_keys($productsInCart);
-                $products = Product::getProductsByIds($productsIds);
+                $products = Product::getItemsInList('id', $productsIds);
                 $totalPrice = Cart::getTotalPrice($products);
                 $totalQuantity = Cart::countItems();
                 // Пользователь авторизирован?

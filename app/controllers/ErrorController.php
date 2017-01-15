@@ -9,6 +9,6 @@ class ErrorController extends AppController
 
     public function indexAction()
     {
-        $this->render('error');
+        $this->render('index');
     }
 }

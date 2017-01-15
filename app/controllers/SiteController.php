@@ -56,14 +56,25 @@ class SiteController extends AppController
         if (!empty($_POST['search_query'])) {
             $search = $_POST['search_query'];
             $_SESSION['search'] = $search;
-            $categoryProducts = Product::getProductsInSearch($search, $page);
-            $total = Product::getCountProductsInSearch($search);
+           // $categoryProducts = Product::getProductsInSearch($search, $page);
+            $categoryProducts = Product::getItemsInPage('name',$search, $page);
+
+            $total = Product::Count('name', $search);
             $pagination = new \Pagination($total, $page, Product::SHOW_BY_DEFAULT, 'page-');
             $pager = $pagination->get();
         }
 
         $this->render('search', ['categoryProducts' => $categoryProducts, 'pager' => $pager, 'search' => $search]);
 
+
+    }
+
+    public function changeMoneyAction()
+    {
+        $_SESSION['selectMoney'] = $_POST['selectMoney'];
+
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+        
 
     }
 

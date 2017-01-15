@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Guliano
- * Date: 24.12.2016
- * Time: 13:44
- */
 
 namespace app\controllers;
 use app\models\Category;
@@ -62,7 +56,7 @@ class AdminProductController extends AppController
                 }
             };
             // Перенаправляем пользователя на страницу управлениями товарами
-            header("Location: /admin/product");
+            header("Location: /admin-product");
         }
         $this->render('create_product', ['categoriesList' => $categoriesList]);
 
@@ -116,7 +110,7 @@ class AdminProductController extends AppController
         self::checkAdmin();
         $product = new Product();
         $product->deleteItem($id);
-        header('Location:/admin/product');
+        header('Location:/admin-product');
 
     }
 

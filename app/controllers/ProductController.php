@@ -12,10 +12,12 @@ class ProductController extends AppController
         try {
             $product = Product::getItemById($productId);
             $this->render('view', ['product' => $product[0]]);
+
         }catch (\Exception $e){
             $controller = new ErrorController(['controller' =>'Error', 'action' =>'index']);
             $action = $controller->indexAction();
         }
+
 
     }
     

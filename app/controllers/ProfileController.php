@@ -16,7 +16,7 @@ class ProfileController extends AppController
 
             $user = User::getItemById($userId);
             
-            $this->render('profile', ['user' => $user[0]]);
+            $this->render('index', ['user' => $user[0]]);
 
         } else {
 
