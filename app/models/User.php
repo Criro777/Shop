@@ -15,6 +15,7 @@ class User extends Model
     public $password;
     public $email;
 
+
     /**
      * Регистрация нового пользователя
      * @return bool
@@ -23,10 +24,11 @@ class User extends Model
     {
 
         $db = Db::instance();
+        //$today = date("g:i a");
 
-        $sql = 'INSERT INTO user (name, email, password) '
-            . 'VALUES (:name, :email, :password)';
-        $result = $db->execute($sql, [':name' => $this->name, ':email' => $this->email, ':password' => crypt($this->password, "salt")]);
+        $sql = 'INSERT INTO user (name, email, password,time) '
+            . 'VALUES (:name, :email, :password,:time)';
+        $result = $db->execute($sql, [':name' => $this->name, ':email' => $this->email, ':password' => crypt($this->password, "salt"),':time' => date("g:i a")]);
 
         return $result;
     }
@@ -60,7 +62,10 @@ class User extends Model
         if (count($errorsRegister) != 0) {
             throw $errorsRegister;
         }
-        parent::fillPostData($data);
+        foreach ($data as $key => $item) {
+
+            $this->$key = trim(strip_tags($item));
+        }
 
     }
 
@@ -71,7 +76,10 @@ class User extends Model
      */
     public function fillLogin($data)
     {
-        parent::fillPostData($data);
+        foreach ($data as $key => $item) {
+
+            $this->$key = trim(strip_tags($item));
+        }
 
         $user = self::checkUserExists();
         $errorsLogin = new MultiException();
@@ -140,7 +148,7 @@ class User extends Model
 
     public static function rememberUser($userId)
     {
-        setcookie('idUser', base64_encode($userId), time() + 3600,'/');
+        setcookie('idUser', base64_encode($userId), time() + 120,'/');
     }
 
     /**
@@ -159,7 +167,7 @@ class User extends Model
         }
       
 
-        //header('Location:user/login');
+        header('Location:user/login');
     }
 
     /**

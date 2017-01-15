@@ -95,7 +95,12 @@ class Cart extends Model
         //вычисляем общую стоимость товаров
         //if ($productsInCart) {
         foreach ($products as $item) {
-            $total += $item->price * $productsInCart[$item->id];
+            if(!(isset($_SESSION['selectMoney'])) or $_SESSION['selectMoney'] == 'dollar'){
+                $total += $item->price * $productsInCart[$item->id];
+            }
+            else{
+                $total += $item->price * 0.96 * $productsInCart[$item->id];
+            }
         }
         //}
         return $total;
