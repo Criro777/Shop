@@ -49,11 +49,10 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="left-sidebar">
-                    <h2>Каталог</h2>
+                    <h2>Категории</h2>
                     <ul class="category-products">
                         <?php echo \vendor\components\TreeCategory::tree_builder() ?>
                     </ul>
-
                 </div>
             </div>
 
@@ -61,13 +60,14 @@
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Популярные товары</h2>
                     <?php foreach ($latestProducts as $product): ?>
+                        <?php if ($product->is_popular): ?>
                         <div class="col-sm-4">
                             <div class="product-image-wrapper">
                                 <div class="single-products">
                                     <div class="productinfo text-center">
-                                        <img style="width: 210px; height: 190px;" src="/public/images/home/product1.jpg"
-                                             alt=""/>
-                                        <h2><?php echo $product->price; ?>$</h2>
+                                        <img style="width: 200px; height: 180px;"
+                                             src="<?php echo \app\models\Product::getImage($product->id); ?>" alt=""/>
+                                        <h2><?php echo \app\models\Product::getCurrentPrice($product->price)?></h2>
                                         <p>
                                             <a href="/product/<?php echo $product->id; ?>"><?php echo $product->name; ?></a>
                                         </p>
@@ -78,6 +78,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </div><!--features_items-->
                 <div class="recommended_items"><!--recommended_items-->
@@ -90,28 +91,35 @@
                          data-cycle-carousel-fluid=true
                          data-cycle-slides="div.item"
                          data-cycle-prev="#prev"
-                         data-cycle-next="#next"
-                    >
+                         data-cycle-next="#next">
                         <?php foreach ($latestProducts as $product): ?>
                             <?php if ($product->is_recommended): ?>
+
                                 <div class="item">
-                                    <div class="product-image-wrapper ">
+
+                                    <div class="recomended-image-wrapper ">
                                         <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="/public/images/home/recommend1.jpg" alt=""/>
-                                                <h2><?php echo $product->price; ?>$</h2>
-                                                <p>
+                                            <div id="infoprod" class="productinfo text-center">
+                                                <img style=" width280px;height: 160px; "
+                                                     src="<?php echo \app\models\Product::getImage($product->id, "mini"); ?>"
+                                                     alt=""/>
+                                                <h5 style="color: #FE980F"><?php echo \app\models\Product::getCurrentPrice($product->price)?></h5>
+                                                
+                                                <p id="abs">
                                                     <a href="/product/<?php echo $product->id; ?>"><?php echo $product->name; ?></a>
                                                 </p>
-                                                <a href="#" id="<?php echo $product->id; ?>"
-                                                   class="btn btn-default add-to-cart"><i
+                                        
+                                                <a  href="#" id="<?php echo $product->id; ?>"
+                                                   class="btn btn-default add-to-cart butcart"><i
                                                         class="fa fa-shopping-cart"></i>В
                                                     корзину</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             <?php endif; ?>
+
                         <?php endforeach; ?>
                     </div>
 

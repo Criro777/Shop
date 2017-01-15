@@ -7,7 +7,7 @@
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
                     <li><a href="/admin">Админпанель</a></li>
-                    <li><a href="/admin/order">Управление заказами</a></li>
+                    <li><a href="/admin-order">Управление заказами</a></li>
                     <li class="active">Редактировать заказ</li>
                 </ol>
             </div>
@@ -19,7 +19,7 @@
 
             <div class="col-lg-4">
                 <div class="login-form">
-                    <form action="#" method="post">
+                    <form action="/admin-order" method="post">
 
                         <p>Имя клиента</p>
                         <input type="text" name="userName" placeholder="" value="<?php echo $order->user_name; ?>">

@@ -2,7 +2,7 @@
     <div class="bg">
         <div class="row">
             <div class="col-sm-12">
-                <h2 class="title text-center">Contact <strong>Us</strong></h2>
+                <h2 class="title text-center">Наши контакты</h2>
                 <div id="map_container">
                     <div id="map"></div>
                 </div>
@@ -10,31 +10,30 @@
         </div>
         <div class="row">
             <div class="col-sm-8">
+                
+                    <div id = "msgSubmit" class="alert alert-success hidden">
+                    <p style="text-align: center;">Сообщение отправлено!<br> Мы ответим Вам на указанный email.</p>
+                    </div>
 
-                <?php if ($result): ?>
-                    <?php echo '<div class="alert alert-success">'; ?>
-                    <?php echo '<p style="text-align: center;">Сообщение отправлено!<br> Мы ответим Вам на указанный email.</p>' ?>
-                    <?php echo ' </div>'; ?>
-                <?php endif; ?>
                 
                 <div class="contact-form">
                     <h2 class="title text-center">Связаться с нами</h2>
                     <div class="status alert alert-success" style="display: none"></div>
                     <form id="main-contact-form" class="contact-form row" name="contact-form" method="post">
                         <div class="form-group col-md-6">
-                            <input type="text" name="name" class="form-control" required="required" placeholder="Имя">
+                            <input type="text" id="name" name="name" class="form-control"  placeholder="Имя">
                         </div>
                         <div class="form-group col-md-6">
-                            <input type="email" name="userEmail" class="form-control" required="required" placeholder="E-mail адрес">
+                            <input type="email" id="email" name="email" class="form-control"  placeholder="E-mail адрес">
                         </div>
                         <div class="form-group col-md-12">
-                            <input type="text" name="subject" class="form-control" required="required" placeholder="Тема">
+                            <input type="text" id="subject" name="subject" class="form-control"  placeholder="Тема">
                         </div>
                         <div class="form-group col-md-12">
-                            <textarea name="textMessage" id="message" required="required" class="form-control" rows="8" placeholder="Ваше сообщение"></textarea>
+                            <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Ваше сообщение"></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <input type="submit" name="message" class="btn btn-primary pull-left" value="Отправить">
+                            <input type="submit" id="form-submit" name="submit"class="btn btn-primary pull-left" value="Отправить">
                         </div>
                     </form>
                 </div>

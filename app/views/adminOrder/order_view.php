@@ -7,7 +7,7 @@
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
                     <li><a href="/admin">Админпанель</a></li>
-                    <li><a href="/admin/order">Управление заказами</a></li>
+                    <li><a href="/admin-order">Управление заказами</a></li>
                     <li class="active">Просмотр заказа</li>
                 </ol>
             </div>
@@ -79,6 +79,6 @@
                 <?php endforeach; ?>
             </table>
 
-            <a href="/admin/order/" class="btn btn-default back"><i class="fa fa-arrow-left"></i> Назад</a>
+            <a href="/admin-order/" class="btn btn-default back"><i class="fa fa-arrow-left"></i> Назад</a>
         </div>
 </section>

@@ -4,14 +4,14 @@
             <div class="col-sm-4">
                 <?php if (isset($errors1)): ?>
                     <?php foreach ($errors1 as $error): ?>
-                        <?php echo '<div class="alert alert-danger">'; ?>
+                        <div class="alert alert-danger">
                         <?php echo $error->getMessage(); ?>
-                        <?php echo ' </div>'; ?>
+                        </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
                 <div class="login-form"><!--login form-->
                     <h2>Вход</h2>
-                    <form action="/user/login" method="post">
+                    <form id= "login" action="/user/login" method="post">
                         <input type="email" name="email" placeholder="E-мэйл" />
                         <input type="password" name="password" placeholder="Пароль"/>
 							<span>

@@ -7,7 +7,7 @@
             <div class="breadcrumbs">
                 <ol class="breadcrumb">
                     <li><a href="/admin">Админпанель</a></li>
-                    <li><a href="/admin/product">Управление товарами</a></li>
+                    <li><a href="/admin-product">Управление товарами</a></li>
                     <li class="active">Редактировать товар</li>
                 </ol>
             </div>
@@ -54,7 +54,8 @@
 
 
                         <p>Детальное описание</p>
-                        <textarea rows="15" name="description"><?php echo $product->description; ?></textarea>
+                        <textarea  rows="15" name="description"><?php echo $product->description; ?></textarea>
+                        
 
                         <br/><br/>
 

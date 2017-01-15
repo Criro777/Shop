@@ -13,7 +13,7 @@
                 </ol>
             </div>
 
-            <a href="/admin/create-product" class="btn btn-default back"><i class="fa fa-plus"></i> Добавить товар</a>
+            <a href="/admin-product/create" class="btn btn-default back"><i class="fa fa-plus"></i> Добавить товар</a>
 
             <h4>Список товаров</h4>
 
@@ -37,7 +37,7 @@
                         <td><?php echo $product->code; ?></td>
                         <td><a href="/product/<?php echo $product->id; ?>"><?php echo $product->name; ?></a></td>
                         <td><?php echo $product->price; ?></td>
-                        <td><a href="/admin/update-product/<?php echo $product->id; ?>" title="Редактировать"><i class="fa fa-pencil-square-o"></i></a></td>
+                        <td><a href="/admin-product/update/<?php echo $product->id; ?>" title="Редактировать"><i class="fa fa-pencil-square-o"></i></a></td>
                         <td> <a href="#" data-toggle="modal" data-target="#<?php echo $product->id; ?>"><i class="fa fa-trash-o"></i></a>
                                 <div class="modal fade" id="<?php echo $product->id;?>" data-backdrop="static"  >
                                     <div class="modal-dialog" role="document">
@@ -46,7 +46,7 @@
                                                 <h3>Вы действительно хотите удалить этот товар ?</h3>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="/admin/delete-product/<?php echo $product->id; ?>"class="btn btn-default  btn-success">Удалить</a>
+                                                <a href="/admin-product/delete/<?php echo $product->id; ?>"class="btn btn-default  btn-success">Удалить</a>
                                                 <a class="btn btn-default btn-danger" data-dismiss="modal">Отмена</a>
                                             </div>
                                         </div><!-- /.modal-content -->

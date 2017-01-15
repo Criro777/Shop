@@ -26,7 +26,7 @@
                                             <?php echo $product->name;?>
                                         </a>
                                     </td>
-                                    <td><?php echo $product->price;?></td>
+                                    <td><?php echo \app\models\Product::getCurrentPrice($product->price)?></td>
                                     <td><?php echo $productsInCart[$product->id];?></td>
                                     <td>
                                         <a id="<?php echo $product->id;?>" class="btn btn-default checkout delete-item" id = "<?php echo $product->id;?>">
