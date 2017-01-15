@@ -61,29 +61,15 @@
                         <a href="/"><img src="/public/images/home/logo.png" alt=""/></a>
                     </div>
                     <div class="btn-group pull-right">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle usa"
-                                    data-toggle="dropdown">
-                                USA
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Canada</a></li>
-                                <li><a href="#">UK</a></li>
-                            </ul>
-                        </div>
 
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle usa"
-                                    data-toggle="dropdown">
-                                DOLLAR
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Canadian Dollar</a></li>
-                                <li><a href="#">Pound</a></li>
-                            </ul>
-                        </div>
+                           <form style="margin-top: 12px;" name="formMoney" id = "formMoney" method="post" action="/site/change-money">
+                            <select  id = "selectMoney"  name = "selectMoney" onchange="fireSubmit(event)" >
+                                <option selected ="selected">Валюта сайта</option>
+                                <option name ="dollar" value = "dollar" >DOLLAR</option>
+                                <option name = "euro" value = "euro">EURO</option>
+                            </select>
+                           </form>
+
                     </div>
                 </div>
                 <div class="col-sm-8">
@@ -127,29 +113,26 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="/" class="active">Home</a></li>
-                            <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                            <li><a href="/" class="active">Главная</a></li>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="/catalog/">Products</a></li>
-                                    <li><a href="/cart/">Cart</a></li>
+                                    <li><a href="/cart/">Корзина</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="blog.html">Blog List</a></li>
-                                    <li><a href="blog-single.html">Blog Single</a></li>
-                                </ul>
+
+                            <li><a href="/blog">Блог</a>
                             </li>
-                            <li><a href="/site/contact">Contact</a></li>
+
+                            <li><a href="/site/contact">Контакты</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
-                        <form method="post" action="#">
+                        <form id="search_form" method="post" action="/site/search">
 
-                            <input id="search" type="submit" value=" ">
-                            <input type="text" placeholder="Search" name="q">
+                            <input id="search" name="search" type="submit"  value="">
+                            <input type="text" placeholder="Поиск" name="search_query" value="<?php echo $_POST['search_query'] ?>">
                         </form>
                     </div>
                 </div>
@@ -267,6 +250,7 @@
 <script src="/../public/js/jquery.cycle2.carousel.js"></script>
 <script src="/../public/js/jquery.scrollUp.min.js"></script>
 <script src="/../public/js/price-range.js"></script>
+<script src="/../public/js/jquery.light.js"></script>
 <script src="/../public/js/jquery.prettyPhoto.js"></script>
 <script src="/../public/js/main.js"></script>
 

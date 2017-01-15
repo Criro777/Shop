@@ -36,9 +36,9 @@
 <script src="/../public/js/jquery.cycle2.carousel.js"></script>
 <script src="/../public/js/jquery.scrollUp.min.js"></script>
 <script src="/../public/js/price-range.js"></script>
+<script src="/../public/js/jquery.light.js"></script>
 <script src="/../public/js/jquery.prettyPhoto.js"></script>
 <script src="/../public/js/main.js"></script>
-
 </body>
 </html>
 

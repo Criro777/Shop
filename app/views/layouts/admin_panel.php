@@ -14,6 +14,7 @@
     <link href="/../public/css/animate.css" rel="stylesheet">
     <link href="/../public/css/main.css" rel="stylesheet">
     <link href="/../public/css/responsive.css" rel="stylesheet">
+    <script src="/../public/AjexFileManager/ajex.js"></script>
     <!--[if lt IE 9]>
     <script src="/public/js/html5shiv.js"></script>
     <script src="/public/js/respond.min.js"></script>
