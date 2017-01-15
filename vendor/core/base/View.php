@@ -25,7 +25,7 @@ class View
 
     /**
      * Инициализация начальный настроек вида
-     * @param $route путь к файлу вида
+     * @param $route путь к файлу вида(директория/файл)
      * @param string $layout текущий шаблон
      * @param string $view текущий файл вида
      */
@@ -38,6 +38,7 @@ class View
             $this->layout = $layout ?: LAYOUT;
         }
         $this->view = $view;
+
     }
 
     /**
@@ -47,14 +48,10 @@ class View
     public function renderView($data = [])
     {
         extract($data);
-        //debug($this->route);
-        $file_view = APP . "/views/{$this->route['controller']}/{$this->route['action']}.php";
+        $file_view = APP . "/views/{$this->route['controller']}/{$this->view}.php";
+
         ob_start();
-        if (is_file($file_view)) {
-            require $file_view;
-        } else {
-            echo "<p>Не найден вид <b>$file_view</b></p>";
-        }
+        require $file_view;
         $content = ob_get_clean();
 
         if (false !== $this->layout) {

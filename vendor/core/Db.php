@@ -9,7 +9,7 @@ namespace vendor\core;
 class Db
 {
     protected static $instance;
-    protected $pdo;
+    public $pdo;
 
     /**
      * Создание объекта PDO для подклоючения к БД.
@@ -44,9 +44,12 @@ class Db
      * @param array $params параметры запроса
      * @return bool результат выполнения запроса
      */
-    public function execute($sql, $params = [])
+    public function execute($sql, $params = [], $id = 0)
     {
         $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params); 
+        if($id){
+        return $id = $this->pdo->lastInsertId();}
         return $stmt->execute($params);
     }
 

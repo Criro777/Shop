@@ -7,7 +7,7 @@ abstract class Controller
 {
     /*текущий маршрут*/
     protected $route = [];
-    
+
     /*текущий шаблон*/
     public $layout;
 
@@ -24,8 +24,9 @@ abstract class Controller
      */
     public function render($view, $data = [])
     {
-        $vObj = new View($this->route, $this->layout, $view);
-        $vObj->renderView($data);
+
+            $vObj = new View($this->route, $this->layout, $view);
+            $vObj->renderView($data);
     }
 
 }

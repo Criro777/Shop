@@ -1,6 +1,7 @@
 <?php
 
 namespace vendor\core;
+
 use app\controllers\ErrorController;
 
 /**
@@ -74,6 +75,7 @@ class Router
 
                 $route['controller'] = self::upperCamelCase($route['controller']);
                 self::$route = $route;
+                //var_dump($route);
                 return true;
             }
         }
@@ -83,32 +85,34 @@ class Router
     /**
      * Перенаправляет URL по корректному маршруту
      * @param string $url входящий URL
-     * @return void
      */
     public static function dispatch($url)
     {
-        //$url = self::removeQueryString($url);
-        try {
-            if (self::matchRoute($url)) {
+        $url = self::removeQueryString($url);
+       // try {
+        if (self::matchRoute($url)) {
 
-                $controller = 'app\controllers\\' . self::$route['controller'] . 'Controller';
-                if (class_exists($controller)) {
-                    $cObj = new $controller(self::$route);
-                    $action = self::lowerCamelCase(self::$route['action']) . 'Action';
-                    $parameters = self::$route['parameter'];
-                    if (method_exists($cObj, $action)) {
-                        $cObj->$action($parameters);
-                    } else {
-                        throw new \Exception();
-                    }
+            $controller = 'app\controllers\\' . self::$route['controller'] . 'Controller';
+            //if (class_exists($controller)) {
+                $cObj = new $controller(self::$route);
+                $action = self::lowerCamelCase(self::$route['action']) . 'Action';
+                $parameters = self::$route['parameter'];
+                $parameter = self::$route['page'];
+                //var_dump($parameter);
+                //var_dump($action);
+                if (method_exists($cObj, $action)) {
+                    $cObj->$action($parameters, $parameter);
                 } else {
-                    throw new \Exception();
+                   throw new \Exception();
                 }
-            }
-        } catch (\Exception $e) {
-            $controller = new ErrorController(['controller' =>'Error', 'action' =>'index']);
-            $action = $controller->indexAction();
+            //} else {
+               //throw new \Exception();
+           // }
         }
+        //} catch (\Exception $e) {
+        //$controller = new ErrorController(['controller' => 'Error', 'action' => 'index']);
+        //$action = $controller->indexAction();
+        //}
 
     }
 
@@ -118,14 +122,16 @@ class Router
      * @return string $name
      */
 
-    public static function upperCamelCase($name)
+    public
+    static function upperCamelCase($name)
     {
 
         return $name = str_replace(' ', '', ucwords(str_replace('-', ' ', $name)));
 
     }
 
-    public static function lowerCamelCase($name)
+    public
+    static function lowerCamelCase($name)
     {
 
         return lcfirst(self::upperCamelCase($name));
@@ -138,7 +144,8 @@ class Router
      * @return string
      */
 
-    public static function removeQueryString($url)
+    public
+    static function removeQueryString($url)
     {
         if ($url) {
             $params = explode('&', $url, 2);
