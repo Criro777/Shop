@@ -21,8 +21,9 @@ if(isset($_COOKIE['idUser'])){
 
 }
 
+
 /* маршруты для контроллера Category*/
-Router::add('^category/(?P<parameter>[0-9]+)/page/?(?P<page>[0-9]+)?$',['controller' => 'Category','action' => 'index']);
+Router::add('^category/(?P<parameter>[0-9]+)/page-/?(?P<page>[0-9]+)?$',['controller' => 'Category','action' => 'index']);
 Router::add('^category/(?P<parameter>[0-9]+)$',['controller' => 'Category', 'action' => 'index']);
 
 /* маршруты для контроллера Product*/
@@ -31,6 +32,8 @@ Router::add('^product/(?P<parameter>[0-9]+)$', ['controller' => 'Product','actio
 
 /*маршруты по умолчанию*/
 //Router::add('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?/(?P<parameter>[0-9]+)/?(?P<page>[a-z0-9]+)?$');
+Router::add('^(?P<controller>[a-z-]+)/(?P<action>[a-z-]+)/page-/?(?P<parameter>[0-9]+)?$');
+Router::add('^(?P<controller>[a-z-]+)/page-/?(?P<parameter>[0-9]+)?$');
 Router::add('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?/(?P<parameter>[0-9]+)$');
 Router::add('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
 Router::add('^$', ['controller' => 'Site', 'action' => 'index']);
