@@ -920,7 +920,7 @@ h2.title {
 }
 
 .add-to-cart {
-    background: #F5F5ED;
+    background: #faebcc;
     border: 0 none;
     border-radius: 0;
     color: #363432;
@@ -1075,7 +1075,8 @@ h2.title {
 .pagination {
     display: inline-block;
     margin-bottom: 25px;
-    margin-top: 0;
+    margin-top: 80px;
+    margin-left:38%;
     padding-left: 15px;
 }
 
@@ -1192,9 +1193,9 @@ h2.title {
     border: 1px solid #F7F7F0;
     border-radius: 5px;
     overflow: hidden;
-    padding-bottom: 60px;
-    padding-left: 60px;
-    padding-top: 60px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-top: 40px;
     position: relative;
 }
 
@@ -1401,13 +1402,13 @@ h2.title {
 
 #form {
     display: block;
-    margin-bottom: 185px;
-    margin-top: 185px;
+    margin-bottom: 75px;
+    margin-left:35%;
+    margin-top: 55px;
     overflow: hidden;
 }
 
 .login-form {
-
 }
 
 .signup-form {
@@ -1719,7 +1720,6 @@ h2.title {
     border-radius: 0;
     resize: none
 }
-
 .user_info select:focus {
     border: 0
 }
@@ -2511,37 +2511,177 @@ h2.title {
     color: #FE980F;
 }
 
-.recommended_items .product-image-wrapper {
-    margin-left: 5px;
-}
 
 .recommended_items .item {
-    padding: 0 14px;
-}
-.recommended_items .item img{
-    //width:100%;
-    padding-left: 0;
-
+    padding: 0 30px;
 }
 
 .recommended_items {
     position: relative;
 }
+.item p a{
+    display: block;
+    min-width:150px;
+    //font-size: 14px;
+    text-align: center;
+}
 
 .recomended-image-wrapper {
     overflow: hidden;
-
-    background: #f3f3f3 url(/template/images/333.jpg) repeat-x;
+    background-color: #ffffff ;
     border-radius: 5px 5px 5px 5px;
-    //padding: 15px 15px 20px 15px;
-    margin: 5px 10px 5px 4px;
+    padding: 0 15px 20px 15px;
+    //margin: 5px 10px 5px 4px;
 / / border: 1 px #d9d9d9 solid;
     border: 1px #F7F7F0 solid;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 
 }
+#abs{
+    margin-top:0px;
+    margin-bottom: 0px;
+    font-size: 13px;
+}
+.butcart{
+   //margin-top: -45px;
+    margin-bottom: -5px;
+    background-color: beige;
+
+
+}
+
+
 .recomended-image-wrapper .productinfo img{
 
-    width: 2%;
+    //width: 245px;
+}
+
+#map_container {
+    position: relative;
+    padding-top: 50%;
+    margin-bottom: -100px;
+}
+#map {
+    position: absolute;
+    width: 100%;
+    height: 60%;
+    top: 0;
+}
+
+
+
+
+
+/**
+ * jQuery lightBox plugin
+ * This jQuery plugin was inspired and based on Lightbox 2 by Lokesh Dhakar (http://www.huddletogether.com/projects/lightbox2/)
+ * and adapted to me for use like a plugin from jQuery.
+ * @name jquery-lightbox-0.5.css
+ * @author Leandro Vieira Pinho - http://leandrovieira.com
+ * @version 0.5
+ * @date April 11, 2008
+ * @category jQuery plugin
+ * @copyright (c) 2008 Leandro Vieira Pinho (leandrovieira.com)
+ * @license CCAttribution-ShareAlike 2.5 Brazil - http://creativecommons.org/licenses/by-sa/2.5/br/deed.en_US
+ * @example Visit http://leandrovieira.com/projects/jquery/lightbox/ for more informations about this jQuery plugin
+ */
+#jquery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    width: 100%;
+    height: 500px;
+}
+#jquery-lightbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    text-align: center;
+    line-height: 0;
+}
+#jquery-lightbox a img { border: none; }
+#lightbox-container-image-box {
+    position: relative;
+    background-color: #fff;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+}
+#lightbox-container-image { padding: 10px; }
+#lightbox-loading {
+    position: absolute;
+    top: 40%;
+    left: 0%;
+    height: 25%;
+    width: 100%;
+    text-align: center;
+    line-height: 0;
+}
+#lightbox-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+}
+#lightbox-container-image-box > #lightbox-nav { left: 0; }
+#lightbox-nav a { outline: none;}
+#lightbox-nav-btnPrev, #lightbox-nav-btnNext {
+    width: 49%;
+    height: 100%;
+    zoom: 1;
+    display: block;
+}
+#lightbox-nav-btnPrev {
+    left: 0;
+    float: left;
+}
+#lightbox-nav-btnNext {
+    right: 0;
+    float: right;
+}
+#lightbox-container-image-data-box {
+    font: 10px Verdana, Helvetica, sans-serif;
+    background-color: #fff;
+    margin: 0 auto;
+    line-height: 1.4em;
+    overflow: auto;
+    width: 100%;
+    padding: 0 10px 0;
+}
+#lightbox-container-image-data {
+    padding: 0 10px;
+    color: #666;
+}
+#lightbox-container-image-data #lightbox-image-details {
+    width: 70%;
+    float: left;
+    text-align: left;
+}
+#lightbox-image-details-caption { font-weight: bold; }
+#lightbox-image-details-currentNumber {
+    display: block;
+    clear: left;
+    padding-bottom: 1.0em;
+}
+#lightbox-secNav-btnClose {
+    width: 66px;
+    float: right;
+    padding-bottom: 0.7em;
+}
+#light{
+    color: #2c3e50;
+    text-decoration:none;
+}
+
+.blog_p{
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 2.6rem;
+    color: #000;
 }
