@@ -11,9 +11,6 @@ use vendor\core\MultiException;
 class User extends Model
 {
     const TABLE = 'user';
-    public $name;
-    public $password;
-    public $email;
 
 
     /**
@@ -26,9 +23,14 @@ class User extends Model
         $db = Db::instance();
         //$today = date("g:i a");
 
-        $sql = 'INSERT INTO user (name, email, password,time) '
-            . 'VALUES (:name, :email, :password,:time)';
-        $result = $db->execute($sql, [':name' => $this->name, ':email' => $this->email, ':password' => crypt($this->password, "salt"),':time' => date("g:i a")]);
+        $sql = 'INSERT INTO ' . static::TABLE . '( name, email, password, time) '
+            . ' VALUES (:name, :email, :password, :time)';
+        $result = $db->execute($sql, [':name' => $this->data['name'], ':email' => $this->data['email'],
+            ':password' => crypt($this->data['password'], "salt"),
+            ':time' => date("g:i a")]);
+
+        //$result = $db->execute($sql, [':name' => $this->name,
+           // ':email' => $this->email, ':password' => crypt($this->password, "salt"),':time' => date("g:i a")]);
 
         return $result;
     }
@@ -38,35 +40,30 @@ class User extends Model
      * @param array $data входящие данные
      * @throws MultiException
      */
-    public function fillRegisterData($data)
+    public function RegValidateData($data)
     {
 
-        $errorsRegister = new MultiException();
+        parent::fillPostData($data);
 
-        if (strlen($data['name']) <= 2) {
-            $errorsRegister->add(new \Exception('Имя не должно быть короче 2-х символов'));
-        }
-        if (strlen($data['password']) <= 6) {
-            $errorsRegister->add(new \Exception('Пароль не должен быть короче 6-ти символов'));
-        }
 
-        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            $errorsRegister->add(new \Exception('Неправильный email!'));
+        $errorsRegister = [];
+
+
+        if (strlen($data['name']) <= 2 or $data['name'] = '') {
+
+            $errorsRegister[] = 'Имя не должно быть короче 2-х символов';
+        }
+        if (strlen($data['password']) <= 6 or $password = '') {
+
+            $errorsRegister[] = 'Пароль не должен быть короче 6-ти символов';
         }
 
         if (User::checkEmailExists($data['email'])) {
-            $errorsRegister->add(new \Exception('Такой email уже используется'));
+
+            $errorsRegister[] = 'Такой email уже используется';
         }
 
-
-        if (count($errorsRegister) != 0) {
-            throw $errorsRegister;
-        }
-        foreach ($data as $key => $item) {
-
-            $this->$key = trim(strip_tags($item));
-        }
-
+        return $errorsRegister;
     }
 
     /**
@@ -74,24 +71,22 @@ class User extends Model
      * @param array $data входящие данные
      * @throws MultiException
      */
-    public function fillLogin($data)
+    public function LogValidateData($data)
     {
-        foreach ($data as $key => $item) {
+        parent::fillPostData($data);
 
-            $this->$key = trim(strip_tags($item));
+        if ($data['email'] = '') {
+            $errorsLogin[] = 'Введите корректный email';
         }
 
         $user = self::checkUserExists();
-        $errorsLogin = new MultiException();
+        $errorsLogin = [];
 
         if (!$user) {
-            $errorsLogin->add(new \Exception('Пользователь не найден'));
+            $errorsLogin[] = 'Пользователь не найден';
         }
 
-        if (count($errorsLogin) != 0) {
-            throw $errorsLogin;
-        }
-
+        return $errorsLogin;
 
     }
 
@@ -124,8 +119,10 @@ class User extends Model
     {
         $db = Db::instance();
         $sql = 'SELECT * FROM user WHERE email = :email AND password = :password';
-        $user = $db->query($sql, [':email' => $this->email, ':password' => crypt($this->password, "salt")]);
+        $user = $db->query($sql, [':email' => $this->data['email'], ':password' => crypt($this->data['password'], "salt")]);
+
         if ($user) {
+
             return $user;
         }
         return false;
@@ -148,7 +145,7 @@ class User extends Model
 
     public static function rememberUser($userId)
     {
-        setcookie('idUser', base64_encode($userId), time() + 120,'/');
+        setcookie('idUser', base64_encode($userId), time() + 60, '/');
     }
 
     /**
@@ -165,7 +162,7 @@ class User extends Model
 
             return $_SESSION['user'];
         }
-      
+
 
         header('Location:user/login');
     }
@@ -178,10 +175,11 @@ class User extends Model
     {
         if (isset($_SESSION['user']) or isset($_COOKIE['idUser'])) {
             return false;
-        }elseif (!isset($_SESSION['user']) && isset($_COOKIE['idUser'])) {
+        } elseif (!isset($_SESSION['user']) && isset($_COOKIE['idUser'])) {
             return false;
-        }elseif(!isset($_COOKIE['idUser'])){
-        return true;}
+        } elseif (!isset($_COOKIE['idUser'])) {
+            return true;
+        }
     }
 
 }
