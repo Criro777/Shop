@@ -10,59 +10,87 @@ class UserController extends AppController
 {
     public function registerAction()
     {
-        if(!isset($_SESSION['user'])) {
+
+        if (!isset($_SESSION['user'])) {
+
+            $this->render('register');
+
+            unset($_SESSION['errors']);
 
             if (isset($_POST['register'])) {
 
-                try {
 
-                    $user = new User();
-                    $user->fillRegisterData($_POST);
+                $user = new User();
+                $validation = $user->RegValidateData($_POST);
+
+
+                if (count($validation) != 0) {
+
+                    $_SESSION['errors'] = $validation;
+                    header('Location:/user/register');
+
+                } else {
                     $success = $user->registerUser();
-
-                } catch (MultiException $errorsRegister) {
+                    $_SESSION['success'] = $success;
+                    header('Location:/user/login');
 
                 }
-            }
-            $this->render('register', ['success' => $success, 'errors' => $errorsRegister]);
-        }else header('Location:/profile');
 
+
+            }
+        } else {
+            header('Location:/profile');
+
+        }
     }
 
     public function loginAction()
     {
-        if(!isset($_SESSION['user'])) {
-        if (isset($_POST['login'])) {
+        if (!isset($_SESSION['user'])) {
 
-            try {
+            $this->render('login');
+            unset($_SESSION['errors']);
+            unset($_SESSION['success']);
+
+            if (isset($_POST['login'])) {
 
                 $user = new User();
-                $user->fillLogin($_POST);
+                $auth = $user->LogValidateData($_POST);
+
+                if (count($auth) != 0) {
+
+                    $_SESSION['errors'] = $auth;
+
+                }
                 $currentUser = $user->checkUserExists();
+
                 User::authUser($currentUser[0]->id);
+
                 if (isset($_POST['remember'])) {
+
                     User::rememberUser($currentUser[0]->id);
 
                 }
                 header("Location:/profile");
-            } catch (MultiException $errorsLogin) {
+                
 
-                // echo $errorsLogin->getMessage();
             }
-        }
-        $this->render('login', ['errors1' => $errorsLogin]);
-    } else header('Location:/profile');
+
+            //header('Location:/user/login');
+
+        } else header('Location:/profile');
 
     }
 
-    public function logoutAction()
+    public
+    function logoutAction()
     {
         session_start();
         unset($_SESSION['user']);
 
         if (isset($_COOKIE['idUser'])) {
 
-            setcookie('idUser', '', time() - 3600,'/');
+            setcookie('idUser', '', time() - 3600, '/');
 
         }
         header("Location: /");
