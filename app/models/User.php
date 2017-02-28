@@ -38,7 +38,7 @@ class User extends Model
     /**
      * Обработка и валидация данных пользователя при регистрации
      * @param array $data входящие данные
-     * @throws MultiException
+     * @return array $errorRegister массив ошибок валидации
      */
     public function RegValidateData($data)
     {
@@ -68,9 +68,10 @@ class User extends Model
 
     /**
      * Обработка и валидация данных пользователя при авторизации
-     * @param array $data входящие данные
-     * @throws MultiException
+     * @param $data массив входящих данных
+     * @return array $errorsLogin массив ошибок валидации
      */
+
     public function LogValidateData($data)
     {
         parent::fillPostData($data);
