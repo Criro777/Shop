@@ -2,16 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
-                <?php if ($success): ?>
-                    <div style="text-align: center;" class="alert alert-success">Вы успешно зарегистрированы!</div>
-                <?php else: ?>
-                <?php if (isset($errors)): ?>
-                    <?php foreach ($errors as $error): ?>
+                <?php if (isset($_SESSION['errors'])): ?>
+                    <?php foreach ($_SESSION['errors'] as $error): ?>
                         <?php echo '<div style="text-align: center" class="alert alert-danger">'; ?>
-                        <?php echo $error->getMessage(); ?>
+                        <?php echo $error; ?>
                         <?php echo ' </div>'; ?>
                     <?php endforeach; ?>
-                    <?php endif; ?>
+         
+                <?php endif; ?>
                 <div class="signup-form"><!--sign up form-->
                     <h2>Регистрация нового пользователя</h2>
                     <form action="/user/register" method="post">
@@ -21,7 +19,7 @@
                         <button type="submit" name="register" class="btn btn-default">Регистрация</button>
                     </form>
                 </div><!--/sign up form-->
-                <?php endif; ?>
+
                 <br/>
                 <br/>
             </div>
