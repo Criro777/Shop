@@ -8,15 +8,40 @@
                         <?php echo $error; ?>
                         <?php echo ' </div>'; ?>
                     <?php endforeach; ?>
-         
+
                 <?php endif; ?>
                 <div class="signup-form"><!--sign up form-->
                     <h2>Регистрация нового пользователя</h2>
-                    <form action="/user/register" method="post">
-                        <input type="text" name ="name" placeholder="Имя" value="<?php echo $_POST['name']?>"/>
-                        <input type="email" name="email" placeholder="E-мэйл" value="<?php echo $_POST['email']?>"/>
-                        <input type="password" name="password" placeholder="Пароль"/>
-                        <button type="submit" name="register" class="btn btn-default">Регистрация</button>
+                    <form action="/user/register" method="post" data-toggle="validator">
+
+                        <div class="form-group has-feedback">
+
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input class="form-control" type="text" name="name" placeholder="Имя" required>
+                            </div>
+                            <span class="glyphicon form-control-feedback reg"></span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input class="form-control" type="email" name="email" placeholder="E-мэйл" required>
+                            </div>
+                            <span class="glyphicon form-control-feedback reg "></span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-eye-close"></i></span>
+                                <input class="form-control" type="password" name="password" required
+                                       placeholder="Пароль">
+                            </div>
+                            <span class="glyphicon form-control-feedback reg "></span>
+                        </div>
+
+                        <button type="submit" name="register" id="register_button btn btn-default"
+                        ">Регистрация</button>
                     </form>
                 </div><!--/sign up form-->
 
