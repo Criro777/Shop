@@ -63,7 +63,7 @@
                     <div class="btn-group pull-right">
 
                            <form style="margin-top: 12px;" name="formMoney" id = "formMoney" method="post" action="/site/change-money">
-                            <select  id = "selectMoney"  name = "selectMoney" onchange="fireSubmit(event)" >
+                            <select  class="form-control" id = "selectMoney"  name = "selectMoney" onchange="fireSubmit(event)" >
                                 <option selected ="selected">Валюта сайта</option>
                                 <option name ="dollar" value = "dollar" >DOLLAR</option>
                                 <option name = "euro" value = "euro">EURO</option>
@@ -131,8 +131,12 @@
                     <div class="search_box pull-right">
                         <form id="search_form" method="post" action="/site/search">
 
-                            <input id="search" name="search" type="submit"  value="">
-                            <input type="text" placeholder="Поиск" name="search_query" value="<?php echo $_POST['search_query'] ?>">
+
+                                <input class="form-control" type="text" placeholder="Поиск..." name="search_query" value="<?php echo $_POST['search_query'] ?>">
+                                <span class="icon"><i class="fa fa-search"></i></span>
+
+
+
                         </form>
                     </div>
                 </div>
@@ -242,6 +246,7 @@
 </footer><!--/Footer-->
 
 <script src="/../public/js/jquery.js"></script>
+<script type="text/javascript" src="/../public/js/validator.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&;sensor=false"></script>
 <script src="/../public/js/bootstrap.min.js"></script>
 <script src="/../public/js/jquery.accordion.js"></script>
