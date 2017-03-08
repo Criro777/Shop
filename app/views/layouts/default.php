@@ -11,6 +11,7 @@
     <link href="/../public/css/animate.css" rel="stylesheet">
     <link href="/../public/css/main.css" rel="stylesheet">
     <link href="/../public/css/responsive.css" rel="stylesheet">
+    <link href="/../public/css/jRating.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="/public/js/html5shiv.js"></script>
     <script src="/public/js/respond.min.js"></script>
@@ -28,6 +29,8 @@
 <?= $content ?>
 
 <script src="/../public/js/jquery.js"></script>
+<script type="text/javascript" src="/../public/js/validator.min.js"></script>
+<script src="/../public/js/jRating.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&;sensor=false"></script>
 <script src="/../public/js/bootstrap.min.js"></script>
 <script src="/../public/js/jquery.accordion.js"></script>
