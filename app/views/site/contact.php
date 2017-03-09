@@ -16,24 +16,30 @@
                     </div>
 
                 
-                <div class="contact-form">
+                <div class="contact-form" >
                     <h2 class="title text-center">Связаться с нами</h2>
-                    <div class="status alert alert-success" style="display: none"></div>
-                    <form id="main-contact-form" class="contact-form row" name="contact-form" method="post">
+                    <form id="main-contact-form" data-toggle="validator">
                         <div class="form-group col-md-6">
-                            <input type="text" id="name" name="name" class="form-control"  placeholder="Имя">
+                            <label for="name"><span style="color:red;">*</span></label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Имя" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <input type="email" id="email" name="email" class="form-control"  placeholder="E-mail адрес">
+                            <label for="name"><span style="color:red;">*</span></label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="E-mail адрес"
+                                   required>
                         </div>
                         <div class="form-group col-md-12">
-                            <input type="text" id="subject" name="subject" class="form-control"  placeholder="Тема">
+                            <label for="name"><span style="color:red;">*</span></label>
+                            <input type="text" id="subject" name="subject" class="form-control" placeholder="Тема"
+                                   required>
                         </div>
                         <div class="form-group col-md-12">
-                            <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="Ваше сообщение"></textarea>
+                            <label for="name"><span style="color:red;">*</span></label>
+                            <textarea name="message" id="message" required class="form-control" rows="8"
+                                      placeholder="Ваше сообщение"></textarea>
                         </div>
                         <div class="form-group col-md-12">
-                            <input type="submit" id="form-submit" name="submit"class="btn btn-primary pull-left" value="Отправить">
+                            <button type="submit" class="btn btn-default">Отправить</button>
                         </div>
                     </form>
                 </div>

@@ -1,5 +1,5 @@
 <li>
-    <a href="?category=<?=$category['id']?>"><?=$category['name']?>
+    <a href="/category/<?=$category['id']?>"><?=$category['name']?>
 
         <?php if( isset($category['childs']) ): ?>
             <span class="badge pull-right"><i class="fa fa-plus"></i></span>

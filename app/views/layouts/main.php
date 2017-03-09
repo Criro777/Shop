@@ -130,7 +130,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
-                        <form id="search_form" method="post" action="/site/search">
+                        <form method="post" action="/site/search">
 
                                 <input class="form-control" type="text" placeholder="Поиск..." name="search_query" value="<?php echo $_POST['search_query'] ?>">
                                 <span class="icon"><i class="fa fa-search"></i></span>

@@ -20,7 +20,6 @@ class Category extends Model
         $sql = 'SELECT * FROM ' . static::TABLE;
         $result = $db->queryEach($sql, 'id');
         return $result;
-       
         
     }
     

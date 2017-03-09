@@ -82,10 +82,10 @@ class UserController extends AppController
 
     }
 
-    public
-    function logoutAction()
+    public function logoutAction()
     {
         session_start();
+
         unset($_SESSION['user']);
 
         if (isset($_COOKIE['idUser'])) {

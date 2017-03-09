@@ -19,7 +19,6 @@
                     <h2>Вход</h2>
                     <form action="/user/login" method="post" data-toggle="validator">
 
-
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
@@ -42,7 +41,7 @@
 								<input type="checkbox" name="remember">
 								Запомнить меня
 							</span>
-                        <button type="submit" id="login_button" class="btn btn-default">Войти</button>
+                        <button type="submit" name = "login" id="login_button" class="btn btn-default">Войти</button>
 
                     </form>
 

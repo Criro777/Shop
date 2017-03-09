@@ -42,11 +42,25 @@ abstract class Model
 
     }
 
+
+    public function getColumn($column)
+    {
+        // Соединение с БД
+        $db = Db::instance();
+        // Текст запроса к БД
+        $sql = "SELECT * FROM "  . static::TABLE;
+        $result = $db->queryOne($sql);
+        return $result;
+
+    }
+
     /**
      * Возвращает запись из таблицы базы данных в виде объекта класса  с заданным id
      * @param integer $id <p>id объекта класса</p>
      * @return array <p>Массив с информацией об объекте класса</p>
+     * @throws \Exception
      */
+
 
     public static function getItemById($id)
     {
@@ -56,6 +70,7 @@ abstract class Model
         $sql = 'SELECT * FROM ' . static::TABLE . ' WHERE id = :id';
         $result = $db->query($sql, [':id' => $id]);
         if (!$result) {
+            
             throw new \Exception();
         }
         return $result;
@@ -139,13 +154,17 @@ abstract class Model
 
     public static function Count($field = false, $value = false)
     {
-        $db = Db::instance();
+
         if($field){
-        $sql = 'SELECT COUNT(id) AS count FROM '. static::TABLE .' WHERE '.$field. ' LIKE ?' ;}
-        else{
+
+        $sql = 'SELECT COUNT(id) AS count FROM '. static::TABLE .' WHERE '.$field. ' LIKE ?' ;
+
+        } else{
+
             $sql = 'SELECT COUNT(id) AS count FROM ' . static::TABLE;
         }
-        $result = $db->queryCount($sql,['%'.$value.'%']);
+        $result = Db::instance()->queryCount($sql,['%'.$value.'%']);
+
         return $result;
     }
 
@@ -154,7 +173,7 @@ abstract class Model
      * @return integer <p>id добавленной в таблицу записи</p>
      */
 
-    public function createItem()
+    public function createItem($flag = 0)
     {
         $columns = [];
         $params = [];
@@ -169,15 +188,12 @@ abstract class Model
         // Текст запроса к БД
         $sql = 'INSERT INTO ' . static::TABLE . '(' . implode(',', $columns) . ')VALUES(' . implode(',', array_keys($params)) . ') ';
         // Получение и возврат результатов. Используется подготовленный запрос
-        $result = $db->execute($sql, $params);
+        $result = $db->execute($sql, $params, $flag);
 
+        if($flag) {
 
-        // Если запрос выполенен успешно, возвращаем id добавленной записи
-
-        if ($result) {
-            return $db->lastInsertId();
+            return $result;
         }
-        return 0;
 
     }
 
@@ -193,7 +209,7 @@ abstract class Model
         $params = [];
 
         foreach ($this->data as $k => $v) {
-            if ($k == 'update')
+            if ($k == 'update' or  $k == 'action')
                 continue;
             $places[] = $k . '=:' . $k;
             $params[':' . $k] = $v;

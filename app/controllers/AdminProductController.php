@@ -17,9 +17,9 @@ class AdminProductController extends AppController
      */
     public function indexAction($page)
     {
-
         self::checkAdmin();
         if (!isset($page)) {
+
             $page = 1;
         }
         $productList = Product::getItemsInPage(false, false, $page);
@@ -46,9 +46,11 @@ class AdminProductController extends AppController
             // Добавляем новый товар
             $newProduct = new Product();
             $newProduct->fillPostData($_POST);
-            $id = $newProduct->createItem();
+            $id = $newProduct->createItem(1);
+
             // Если запись добавлена
             if ($id) {
+
                 // Проверим, загружалось ли через форму изображение
                 if (is_uploaded_file($_FILES["image"]["tmp_name"])) {
                     // Если загружалось, переместим его в нужную папке, дадим новое имя
@@ -56,7 +58,7 @@ class AdminProductController extends AppController
                 }
             };
             // Перенаправляем пользователя на страницу управлениями товарами
-            header("Location: /admin-product");
+           // header("Location: /admin-product");
         }
         $this->render('create_product', ['categoriesList' => $categoriesList]);
 

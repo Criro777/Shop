@@ -40,16 +40,19 @@ class Db
 
     /**
      * Функция обёртка для создания подготовленного запроса и внесеня данных в БД
-     * @param string $sql  $sql текущий sql-запрос
+     * @param string $sql $sql текущий sql-запрос
      * @param array $params параметры запроса
      * @return bool результат выполнения запроса
      */
-    public function execute($sql, $params = [], $id = 0)
+    public function execute($sql, $params = [], $flag = 0)
     {
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($params); 
-        if($id){
-        return $id = $this->pdo->lastInsertId();}
+        if ($flag == 1) {
+
+            $stmt->execute($params);
+            return $id = $this->pdo->lastInsertId();
+
+        }
         return $stmt->execute($params);
     }
 
@@ -66,7 +69,18 @@ class Db
         if (!$res) {
             throw new \PDOException();
         }
-        return $stmt->fetchAll(\PDO::FETCH_CLASS,static::class);
+        
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, static::class);
+    }
+
+    public function queryOne($sql, $params =[])
+    {
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($params);
+
+        return $stmt->fetchAll();
+        
     }
 
     /**
@@ -76,12 +90,12 @@ class Db
      * @return array массив с данными
      */
 
-    public function queryEach($sql,$key,$params = [])
+    public function queryEach($sql, $key, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
         $arr_cat = [];
-        while($row = $stmt->fetch()){
+        while ($row = $stmt->fetch()) {
             $arr_cat[$row[$key]] = $row;
         }
         return $arr_cat;
@@ -94,11 +108,11 @@ class Db
      * @return integer количество товаров
      */
 
-    public function queryCount($sql,$params = [])
+    public function queryCount($sql, $params = [])
     {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
-            $row = $stmt->fetch();
+        $row = $stmt->fetch();
         return $row['count'];
 
     }

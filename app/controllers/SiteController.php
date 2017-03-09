@@ -16,23 +16,27 @@ class SiteController extends AppController
 
         $this->render('index', ['latestProducts' => $latestProducts]);
 
+
     }
 
     public function messageAction()
     {
-
         $name = $_POST["name"];
         $email = $_POST["email"];
         $message = $_POST["message"];
         $subject = $_POST["subject"];
         $EmailTo = 'php.start@mail.ru';
 
-        $Body = "Имя: {$name}. Сообщение: {$message}. От {$email}";
-        $result = mail($EmailTo, $subject, $Body, "From:" . $email);
-        if ($result) {
-            echo "success";
-        }
+        if ($name != '' && $email != '' && $message != '' && $subject != '') {
 
+            $Body = "Имя: {$name}. Сообщение: {$message}. От {$email}";
+
+            $result = mail($EmailTo, $subject, $Body, "From:" . $email);
+
+            echo "success";
+
+        } else echo "error";
+ 
     }
 
     public function contactAction()
@@ -56,8 +60,8 @@ class SiteController extends AppController
         if (!empty($_POST['search_query'])) {
             $search = $_POST['search_query'];
             $_SESSION['search'] = $search;
-           // $categoryProducts = Product::getProductsInSearch($search, $page);
-            $categoryProducts = Product::getItemsInPage('name',$search, $page);
+            // $categoryProducts = Product::getProductsInSearch($search, $page);
+            $categoryProducts = Product::getItemsInPage('name', $search, $page);
 
             $total = Product::Count('name', $search);
             $pagination = new \Pagination($total, $page, Product::SHOW_BY_DEFAULT, 'page-');
@@ -74,7 +78,7 @@ class SiteController extends AppController
         $_SESSION['selectMoney'] = $_POST['selectMoney'];
 
         header("Location: " . $_SERVER['HTTP_REFERER']);
-        
+
 
     }
 

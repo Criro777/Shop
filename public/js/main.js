@@ -2,49 +2,32 @@
 
 $('#sl2').slider();
 
-var RGBChange = function () {
-    $('#RGB').css('background', 'rgb(' + r.getValue() + ',' + g.getValue() + ',' + b.getValue() + ')')
-};
-
-/*$("#login").submit(function(event){
-// cancels the form submission
-    event.preventDefault();
-    $("#login")[0].reset();
-});*/
-
 function fireSubmit(event) {
     $('#formMoney').submit();
 }
 
 
-$(document).ready(function () {
-    $(".category-products").dcAccordion();
-});
 
-$(document).ready(function () {
-    $(".gallery a").lightBox({
-        overlayBgColor: '#f6f6f6',
-        overlayOpacity: 0.6,
-        imageLoading: '/public/images/light/loading.gif',
-        imageBtnClose: '/public/images/light/close.gif',
-        imageBtnPrev: '/public/images/light/prev.gif',
-        imageBtnNext: '/public/images/light/next.gif',
-        containerResizeSpeed: 350,
-        txtImage: 'Изображение',
-        txtOf: 'из'
-    });
-});
+/*----------------Ajax-функции для работы с контактами---------------*/
 
-$("#main-contact-form").submit(function (event) {
-// cancels the form submission
-    event.preventDefault();
-    submitForm();
+
+$("#main-contact-form").validator().on("submit", function (e) {
+//
+    if (e.isDefaultPrevented()) {
+
+        //submitMSG(false, "Did you fill in the form properly?");
+
+    } else {
+        // everything looks good!
+        e.preventDefault();
+        submitForm();
+    }
 });
 
 function submitForm() {
 // Переменные с данными из формы
-    var name = $("#name").val();
-    var email = $("#email").val();
+    var name    = $("#name").val();
+    var email   = $("#email").val();
     var subject = $("#subject").val();
     var message = $("#message").val();
     $.ajax({
@@ -52,19 +35,26 @@ function submitForm() {
         url: "/site/message",
         data: "name=" + name + "&email=" + email + "&message=" + message,
         success: function (data) {
-           if (data == "success") {
-                formSuccess();
-                //$("#main-contact-form")[0].reset();
-           }
+            if (data == "success") {
+
+                $("#msgSubmit").removeClass("hidden");
+                $("#main-contact-form")[0].reset();
+            }
         }
     });
 }
-function formSuccess() {
 
-    $("#msgSubmit").removeClass("hidden");
-    //$("#contactForm")[0].reset();
+function submitMSG(valid, msg) {
+    if (valid) {
+        var msgClasses = "alert alert-success";
+    } else {
+        var msgClasses = "alert alert-danger";
+    }
+    $("#msgSubmit").removeClass().addClass(msgClasses).text(msg);
+
 }
-/*---------------------Карта Google---------------------------- */
+/*----------------------------Карта Google----------------------------*/
+
 function initialize() {
     var myLatlng = new google.maps.LatLng(53.3333, -3.08333),
         mapOptions = {
@@ -94,7 +84,8 @@ function initialize() {
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 
-/*scroll to top*/
+
+/*--------------------------Скроллинг страницы------------------------*/
 
 $(document).ready(function () {
     $(function () {
@@ -115,13 +106,47 @@ $(document).ready(function () {
             zIndex: 2147483647 // Z-Index for the overlay
         });
     });
-});
+    /*--------------------------Плагин галереи------------------------*/
+
+    $(".gallery a").lightBox({
+        overlayBgColor: '#f6f6f6',
+        overlayOpacity: 0.6,
+        imageLoading: '/public/images/light/loading.gif',
+        imageBtnClose: '/public/images/light/close2.png',
+        imageBtnPrev: '/public/images/light/prev.png',
+        imageBtnNext: '/public/images/light/next.png',
+        containerResizeSpeed: 350,
+        txtImage: 'Изображение',
+        txtOf: 'из'
+    });
+
+    /*------------------Аккордеон для дерева категорий----------------*/
+
+    $(".category-products").dcAccordion();
 
 
+    /*------------------------Рейтинг в звёздах-----------------------*/
 
+    var isVoted = false;
 
-/*-----------------Ajax-функции для работы с корзиной----------------*/
-$(document).ready(function () {
+    if($(".area").hasClass('disabled')) {
+
+        isVoted = true;
+    }
+    $(".area").jRating({
+
+        showRateInfo: true,
+        smallStarsPath:'/public/icons/small.png',
+        bigStarsPath:'/public/icons/stars.png',
+        phpPath: '/blog/add-rate/',
+        step: true,
+        rateMax: 10,
+        type: 'big', // показать маленькие звезды, а не большие по умолчанию);
+        isDisabled: isVoted
+    });
+
+    /*-------------------Функции для работы с корзиной----------------*/
+
     $(".add-to-cart").click(function () {
         var params = {
             quantity: $("#quantity").val(),
@@ -153,9 +178,11 @@ $(document).ready(function () {
     });
 
     function getQty() {
-        
+
         $.post("/cart/count/", {}, function (data) {
             $("#cart-count").html(data);
         });
     }
+
+
 });

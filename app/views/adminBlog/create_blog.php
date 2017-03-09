@@ -44,6 +44,9 @@
                         <br/><br/>
                         <p>Автор</p>
                         <input type="text" name="author" placeholder="" value="">
+                        
+                        <input type="hidden" name="date" >
+                        <input type="hidden" name="time" >
 
 
                         <input type="submit" name="create" class="btn btn-default" value="Сохранить">
