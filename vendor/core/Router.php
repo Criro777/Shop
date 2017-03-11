@@ -89,30 +89,33 @@ class Router
     public static function dispatch($url)
     {
         $url = self::removeQueryString($url);
-       // try {
-        if (self::matchRoute($url)) {
 
-            $controller = 'app\controllers\\' . self::$route['controller'] . 'Controller';
-            //if (class_exists($controller)) {
+        try {
+
+            if (self::matchRoute($url)) {
+
+                $controller = 'app\controllers\\' . self::$route['controller'] . 'Controller';
+                //if (class_exists($controller)) {
                 $cObj = new $controller(self::$route);
                 $action = self::lowerCamelCase(self::$route['action']) . 'Action';
                 $parameters = self::$route['parameter'];
-                $parameter = self::$route['page'];
-                //var_dump($parameter);
-                //var_dump($action);
+                $page = self::$route['page'];
+
                 if (method_exists($cObj, $action)) {
-                    $cObj->$action($parameters, $parameter);
+                    $cObj->$action($parameters, $page);
                 } else {
-                   throw new \Exception();
+
+                    throw new \Exception();
                 }
-            //} else {
-               //throw new \Exception();
-           // }
+            } else {
+
+                throw new \Exception();
+            }
+        } catch (\Exception $e) {
+
+            $controller = new ErrorController(['controller' => 'Error', 'action' => 'index']);
+            $action = $controller->indexAction();
         }
-        //} catch (\Exception $e) {
-        //$controller = new ErrorController(['controller' => 'Error', 'action' => 'index']);
-        //$action = $controller->indexAction();
-        //}
 
     }
 

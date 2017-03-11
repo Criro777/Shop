@@ -76,6 +76,29 @@ abstract class Model
         return $result;
 
     }
+    
+    /**
+     * Возвращает запись из таблицы базы данных в виде объекта класса  по заданному параметру
+     * @param $field <p>Поле в таблице БД</p>
+     * @param $param <p>Параметр поиска</p>
+     * @return array <p>Массив с информацией об объекте класса</p>
+     * @throws \Exception
+     */
+
+    public static function getItemByParam($field, $param)
+    {
+        // Соединение с БД
+        $db = Db::instance();
+        // Текст запроса к БД
+        $sql = "SELECT * FROM  " . static::TABLE . " WHERE $field = ?";
+        $result = $db->query($sql, [$param]);
+        if (!$result) {
+
+            throw new \Exception();
+        }
+        return $result;
+
+    }
 
     /**
      * Возвращает построчно $count последних записей из таблице
