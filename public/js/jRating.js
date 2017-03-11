@@ -22,6 +22,7 @@
             /** Boolean vars **/
             step: false, // if true,  mouseover binded star by star,
             showRateInfo: true,
+            isDisabled: jDisabled,
 
             /** Integer vars **/
             length: 5, // number of star to display
@@ -29,7 +30,6 @@
             rateMax: 20, // maximal rate - integer from 0 to 9999 (or more)
             rateInfosX: -35, // relative position in X axis of the info box when mouseover
             rateInfosY: 5, // relative position in Y axis of the info box when mouseover
-
 
             /** Functions **/
             onSuccess: null,
@@ -108,7 +108,7 @@
                         var relativeX = e.pageX - realOffsetLeft;
 
                     },
-                    mouseover: function (e) {
+                    mouseover: function(e) {
 
 
                         $(this).css('cursor', 'pointer');
@@ -176,7 +176,7 @@
                                 else {
 
                                     /** ONLY FOR THE DEMO, YOU CAN REMOVE THIS CODE **/
-                                    //$('.area').addClass('disabled');
+                                    $(this).unbind().css('cursor', 'default').addClass('jDisabled');
                                     /** END ONLY FOR THE DEMO **/
 
                                     /** Here you can display an alert box,
