@@ -29,7 +29,6 @@ class Router
     public static function add($regexp, $route = [])
     {
         self::$routes[$regexp] = $route;
-
     }
 
     /**
@@ -95,21 +94,22 @@ class Router
             if (self::matchRoute($url)) {
 
                 $controller = 'app\controllers\\' . self::$route['controller'] . 'Controller';
-                //if (class_exists($controller)) {
-                $cObj = new $controller(self::$route);
-                $action = self::lowerCamelCase(self::$route['action']) . 'Action';
-                $parameters = self::$route['parameter'];
-                $page = self::$route['page'];
+                if (class_exists($controller)) {
+                    $cObj = new $controller(self::$route);
+                    $action = self::lowerCamelCase(self::$route['action']) . 'Action';
+                    $parameters = self::$route['parameter'];
+                    $page = self::$route['page'];
 
-                if (method_exists($cObj, $action)) {
-                    $cObj->$action($parameters, $page);
+                    if (is_callable([$cObj, $action])) {
+                        $cObj->$action($parameters, $page);
+                    } else {
+
+                        throw new \Exception();
+                    }
                 } else {
 
                     throw new \Exception();
                 }
-            } else {
-
-                throw new \Exception();
             }
         } catch (\Exception $e) {
 
@@ -125,20 +125,14 @@ class Router
      * @return string $name
      */
 
-    public
-    static function upperCamelCase($name)
+    public static function upperCamelCase($name)
     {
-
         return $name = str_replace(' ', '', ucwords(str_replace('-', ' ', $name)));
-
     }
 
-    public
-    static function lowerCamelCase($name)
+    public static function lowerCamelCase($name)
     {
-
         return lcfirst(self::upperCamelCase($name));
-
     }
 
     /**
@@ -147,8 +141,7 @@ class Router
      * @return string
      */
 
-    public
-    static function removeQueryString($url)
+    public static function removeQueryString($url)
     {
         if ($url) {
             $params = explode('&', $url, 2);
