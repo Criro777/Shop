@@ -1,3 +1,3 @@
 Интернет-магазин
 
-[!screenshot](screen.png)
+![screenshot](screen.png)
