@@ -1,3 +1,3 @@
 Интернет-магазин
 
-![screenshot](screen.png)
+![screenshot](https://github.com/Criro777/Shop/screen.png)
